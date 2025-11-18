@@ -1,19 +1,42 @@
 // src/components/calculator/Calculator.jsx
-import React, { useState } from 'react'; // useState 임포트
+import React, { useState } from 'react';
 import Button from '../common/Button';
 import ErrorDisplay from '../common/ErrorDisplay';
+import apiClient from '../../api/apiClient';
 
 function Calculator() {
-  // 1. 상태 변수 정의
   const [expression, setExpression] = useState('');
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
-  // 2. '초기화' 버튼 핸들러
+  const handleSubmit = async () => {
+    setResult(null);
+    setError(null);
+    setIsLoading(true);
+
+    try {
+      const response = await apiClient.post('/calculator/add', {
+        expression: expression 
+      });
+      setResult(response.data.result);
+
+    } catch (apiError) {
+      if (apiError.response && apiError.response.data) {
+        setError(apiError.response.data);
+      } else {
+        setError({ code: 'UNKNOWN', message: '알 수 없는 오류가 발생했습니다.' });
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleReset = () => {
     setExpression('');
     setResult(null);
     setError(null);
+    setIsLoading(false);
   };
 
   return (
@@ -27,13 +50,17 @@ function Calculator() {
         style={{ width: '100%', minHeight: '80px' }}
         value={expression}
         onChange={(e) => setExpression(e.target.value)}
+        disabled={isLoading}
       />
       
       <div>
-        <Button>계산하기</Button>
+        <Button onClick={handleSubmit} disabled={isLoading}>
+          {isLoading ? '계산 중...' : '계산하기'}
+        </Button>
         <Button 
           onClick={handleReset} 
           style={{ backgroundColor: '#6c757d', marginLeft: '8px' }}
+          disabled={isLoading}
         >
           초기화
         </Button>
