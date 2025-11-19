@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Calculator from './components/calculator/Calculator';
 import CarRace from './components/racingcar/CarRace';
+import Lotto from './components/lotto/Lotto';
 
 function App() {
   const [currentTab, setCurrentTab] = useState('calculator');
@@ -22,6 +23,7 @@ function App() {
       <main>
         {currentTab === 'calculator' && <Calculator />}
         {currentTab === 'car-race' && <CarRace />}
+        {currentTab === 'lotto' && <Lotto />}
       </main>
     </div>
   );
