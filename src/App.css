@@ -1,13 +1,11 @@
-/* src/App.css */
-
-/* 1. 전역 설정 & 배경 */
 :root {
-  --primary-color: #36f;       /* 토스/우아한 스타일의 쨍한 파랑 */
-  --primary-hover: #1e5cd9;    /* 호버 시 진한 파랑 */
-  --bg-color: #f3f4f6;         /* 연한 회색 배경 */
+  --primary-color: #36f;
+  --primary-hover: #1e5cd9;
+  --bg-color: #f5f6f7;
   --text-color: #333;
   --border-color: #e1e2e4;
-  --danger-color: #dc3545;
+  --input-bg: #fff;
+  --card-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 * {
@@ -26,143 +24,243 @@ body {
 
 .App {
   width: 100%;
-  max-width: 800px; /* 적당한 모바일~태블릿 너비 */
-  margin: 40px 20px;
-}
-
-/* 2. 헤더 영역 */
-header {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-header h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #111;
-}
-
-header p {
-  color: #666;
-  font-size: 1rem;
-}
-
-/* 3. 탭 내비게이션 (Tab) */
-nav {
+  max-width: 1280px;
+  margin: 0 auto;
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  flex-direction: column;
+  padding: 0 40px;
+}
+
+.top-nav-bar {
+  background-color: #fff;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo-img {
+  height: 22px;
+  width: auto;
+}
+
+.nav-title {
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #333;
+  letter-spacing: -0.5px;
+}
+
+.page-header {
+  padding: 60px 0 40px;
+  text-align: center;
+}
+
+.page-title {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #333;
+  margin: 0;
+  letter-spacing: -1px;
+}
+
+.main-card {
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: var(--card-shadow);
+  margin-bottom: 60px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.05);
+  min-height: 600px;
+  min-width: 750px;
+}
+
+.card-header {
+  padding: 30px 50px;
+  border-bottom: 1px solid #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   justify-content: center;
 }
 
-.tab-button {
-  padding: 10px 20px;
-  border: none;
-  background: transparent;
+.card-subtitle {
   font-size: 1rem;
+  color: #868e96;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.6;
+  word-break: keep-all;
+}
+
+.mission-tabs {
+  display: flex;
+  background-color: #fafafa;
+  border-bottom: 1px solid #eee;
+  padding: 0 30px;
+}
+
+.tab-btn {
+  padding: 20px 40px;
+  background: none;
+  border: none;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: #888;
+  color: #868e96;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
-  transition: all 0.2s;
+  position: relative;
+  transition: all 0.2s ease;
 }
 
-.tab-button:hover {
+.tab-btn:hover {
+  color: #333;
+  background-color: rgba(0,0,0,0.02);
+}
+
+.tab-btn.active {
   color: var(--primary-color);
 }
 
-.tab-button.active {
-  color: var(--primary-color);
-  border-bottom: 3px solid var(--primary-color);
-}
-
-/* 4. 메인 카드 영역 (흰색 박스) */
-main {
-  background-color: white;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  min-height: 400px;
-}
-
-h3 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  border-bottom: 2px solid #eee;
-  padding-bottom: 15px;
-  margin-bottom: 25px;
-}
-
-h4 {
-  margin-top: 25px;
-  margin-bottom: 10px;
-  font-size: 1.1rem;
-}
-
-/* 5. 공통 입력 폼 (Input, Textarea) */
-input, textarea {
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
   width: 100%;
-  padding: 12px 15px;
-  margin: 8px 0 16px;
-  border: 1px solid var(--border-color);
+  height: 3px;
+  background-color: var(--primary-color);
+}
+
+.mission-content {
+  padding: 60px 80px;
+  background-color: #fff;
+}
+
+.mission-content h1, .mission-content h2, .mission-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 24px;
+  color: #333;
+  font-weight: 700;
+}
+
+.mission-content p, .mission-content label {
+  font-size: 1rem;
+  color: #495057;
+  margin-bottom: 10px;
+  font-weight: 600;
+  display: block;
+}
+
+.mission-content input[type="text"],
+.mission-content input[type="number"] {
+  width: 100%;
+  max-width: 600px;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  border: 1px solid #dee2e6;
   border-radius: 8px;
   font-size: 1rem;
-  transition: border-color 0.2s;
-  font-family: inherit;
+  transition: all 0.2s;
+  background-color: #f8f9fa;
+  display: block;
 }
 
-input:focus, textarea:focus {
+.mission-content input:focus {
   outline: none;
   border-color: var(--primary-color);
-  box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgba(54, 108, 255, 0.1);
 }
 
-label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 4px;
-  font-size: 0.9rem;
-  color: #555;
-}
-
-/* 6. 공통 버튼 스타일 (.common-blue-button) */
-.common-blue-button {
+.mission-content button {
   background-color: var(--primary-color);
   color: white;
   border: none;
-  padding: 12px 20px;
+  padding: 14px 32px;
   border-radius: 8px;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
-  width: auto;
-  min-width: 100px;
+  transition: background-color 0.2s, transform 0.1s;
+  box-shadow: 0 4px 12px rgba(54, 108, 255, 0.2);
 }
 
-.common-blue-button:hover {
+.mission-content button:hover {
   background-color: var(--primary-hover);
+  transform: translateY(-2px);
 }
 
-.common-blue-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.mission-content button:active {
+  transform: translateY(0);
 }
 
-/* 7. 에러 메시지, 결과 박스 등 유틸리티 */
-.error-display {
-  background-color: #fff5f5;
-  border: 1px solid #fed7d7;
-  color: #c53030;
-  padding: 10px;
-  border-radius: 8px;
-  margin-top: 15px;
+.mission-content div[class*="result"], 
+.mission-content p[class*="result"] {
+  background-color: #f1f3f5;
+  border: 1px solid #e9ecef;
+  padding: 24px;
+  border-radius: 12px;
+  margin-top: 30px;
+  font-family: "SF Mono", Menlo, Monaco, Consolas, monospace;
+  color: #333;
+  line-height: 1.6;
+  font-size: 1.05rem;
+  max-width: 800px;
 }
 
-.result-box {
-  background-color: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  font-family: monospace;
-  margin-top: 10px;
+footer {
+  text-align: center;
+  padding: 40px 0 80px;
+  color: #adb5bd;
+  font-size: 0.9rem;
+  border-top: 1px solid #eee;
+  margin-top: auto;
+}
+
+.footer-links a {
+  color: #868e96;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--primary-color);
+}
+
+.fixed-github-btn {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  background-color: #24292e;
+  color: white;
+  padding: 16px 28px;
+  border-radius: 50px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s;
+  z-index: 1000;
+  font-size: 1rem;
+}
+
+.fixed-github-btn:hover {
+  transform: translateY(-4px);
+  background-color: #1b1f23;
+}
+
+.github-icon {
+  width: 24px;
+  height: 24px;
+  fill: white;
 }
