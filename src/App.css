@@ -1,38 +1,168 @@
-.App {
-  text-align: center;
+/* src/App.css */
+
+/* 1. 전역 설정 & 배경 */
+:root {
+  --primary-color: #36f;       /* 토스/우아한 스타일의 쨍한 파랑 */
+  --primary-hover: #1e5cd9;    /* 호버 시 진한 파랑 */
+  --bg-color: #f3f4f6;         /* 연한 회색 배경 */
+  --text-color: #333;
+  --border-color: #e1e2e4;
+  --danger-color: #dc3545;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  min-height: 100vh;
+}
+
+.App {
+  width: 100%;
+  max-width: 800px; /* 적당한 모바일~태블릿 너비 */
+  margin: 40px 20px;
+}
+
+/* 2. 헤더 영역 */
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  color: #111;
+}
+
+header p {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* 3. 탭 내비게이션 (Tab) */
+nav {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.tab-button {
+  padding: 10px 20px;
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.2s;
+}
+
+.tab-button:hover {
+  color: var(--primary-color);
+}
+
+.tab-button.active {
+  color: var(--primary-color);
+  border-bottom: 3px solid var(--primary-color);
+}
+
+/* 4. 메인 카드 영역 (흰색 박스) */
+main {
+  background-color: white;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  min-height: 400px;
+}
+
+h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+}
+
+h4 {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+/* 5. 공통 입력 폼 (Input, Textarea) */
+input, textarea {
+  width: 100%;
+  padding: 12px 15px;
+  margin: 8px 0 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(51, 102, 255, 0.1);
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* 6. 공통 버튼 스타일 (.common-blue-button) */
+.common-blue-button {
+  background-color: var(--primary-color);
   color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: auto;
+  min-width: 100px;
 }
 
-.App-link {
-  color: #61dafb;
+.common-blue-button:hover {
+  background-color: var(--primary-hover);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.common-blue-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* 7. 에러 메시지, 결과 박스 등 유틸리티 */
+.error-display {
+  background-color: #fff5f5;
+  border: 1px solid #fed7d7;
+  color: #c53030;
+  padding: 10px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.result-box {
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  font-family: monospace;
+  margin-top: 10px;
 }

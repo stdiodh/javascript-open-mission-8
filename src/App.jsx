@@ -11,13 +11,28 @@ function App() {
     <div className="App">
       <header>
         <h1>우아한테크코스 프리코스 8기 오픈미션</h1>
-        <p>계산기, 자동차 경주, 로또</p>
+        <p>속도보다 깊이를 추구하는 개발자를 지향합니다.</p>
       </header>
 
       <nav>
-        <button onClick={() => setCurrentTab('calculator')}>계산기</button>
-        <button onClick={() => setCurrentTab('car-race')}>자동차 경주</button>
-        <button onClick={() => setCurrentTab('lotto')}>로또</button>
+        <button 
+          className={`tab-button ${currentTab === 'calculator' ? 'active' : ''}`}
+          onClick={() => setCurrentTab('calculator')}
+        >
+          계산기
+        </button>
+        <button 
+          className={`tab-button ${currentTab === 'car-race' ? 'active' : ''}`}
+          onClick={() => setCurrentTab('car-race')}
+        >
+          자동차 경주
+        </button>
+        <button 
+          className={`tab-button ${currentTab === 'lotto' ? 'active' : ''}`}
+          onClick={() => setCurrentTab('lotto')}
+        >
+          로또
+        </button>
       </nav>
 
       <main>
