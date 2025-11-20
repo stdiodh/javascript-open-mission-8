@@ -73,7 +73,7 @@ function CarRace() {
               <div key={roundIndex} style={{marginBottom: '10px'}}>
                 <strong>Round {roundIndex + 1}</strong>
                 {round.map((car) => (
-                  <div key={car.name}>=
+                  <div key={car.name}>
                     {car.name} : {'-'.repeat(car.position)}
                   </div>
                 ))}
