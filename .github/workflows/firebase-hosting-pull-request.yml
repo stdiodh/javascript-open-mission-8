@@ -13,16 +13,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
-
-      - name: Debug Build Output
+      - name: Debug - Check Config and Build
         run: |
-          echo "=== Build Directory List ==="
+          echo "=== 1. Check firebase.json content ==="
+          cat firebase.json
+          
+          echo "=== 2. Check build directory ==="
           ls -la build/
-          echo "=== Static JS List ==="
-          ls -la build/static/js/
-
+          
+          echo "=== 3. Check index.html content ==="
+          cat build/index.html
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STDIODH_OPEN_MISSION_8 }}
           projectId: stdiodh-open-mission-8
+          entryPoint: "."
