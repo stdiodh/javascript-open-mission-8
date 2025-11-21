@@ -15,16 +15,19 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies and Build for Main
+      - name: Install dependencies and Build
         run: |
           npm ci
           npm run build
+
+      - name: Force Include Build Folder
+        run: rm .gitignore
 
       - name: Deploy to Firebase Hosting (Live)
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STDIODH_OPEN_MISSION_8 }}
-          projectId: stdiodh-open-mission-8
+          projectId: open-mission-8-stdiodh
           entryPoint: "."
           channelId: live
