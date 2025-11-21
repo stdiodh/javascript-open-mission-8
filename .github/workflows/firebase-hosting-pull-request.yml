@@ -1,9 +1,6 @@
-name: Deploy to Firebase Hosting
+name: Deploy Firebase Hosting Preview (PR)
 
 on:
-  push:
-    branches:
-      - main
   pull_request:
   workflow_dispatch:
 
@@ -13,7 +10,8 @@ permissions:
   pull-requests: write
 
 jobs:
-  build_and_deploy:
+  build_and_preview:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,18 +26,30 @@ jobs:
           npm ci
           npm run build
 
-      - name: Debug - Check Build Output
+      - name: Debug - Check Root and firebase.json
         run: |
-          echo "=== Check build directory ==="
+          echo "=== Current directory ==="
+          pwd
+          echo "=== List files in root ==="
+          ls -la
+          if [ -f firebase.json ]; then
+            echo "firebase.json found!"
+          else
+            echo "firebase.json NOT FOUND!"
+          fi
+
+      - name: Debug - Check build folder
+        run: |
+          echo "=== build directory contents ==="
           ls -R build
-          echo "=== Check index.html ==="
+          echo "=== index.html preview ==="
           head -n 10 build/index.html
 
-      - name: Deploy to Firebase Hosting
+      - name: Deploy to Firebase Hosting (Preview)
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STDIODH_OPEN_MISSION_8 }}
           projectId: stdiodh-open-mission-8
-          entryPoint: "build"
-          channelId: pr-${{ github.event.pull_request.number }}
+          entryPoint: "."
+          channelId: ${{ format('pr-{0}', github.event.pull_request.number) }}
