@@ -1,0 +1,38 @@
+name: Deploy Firebase Hosting Preview (PR)
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  build_and_preview:
+    if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies and Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Force Include Build Folder
+        run: rm .gitignore
+
+      - name: Deploy to Firebase Hosting (Preview)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STDIODH_OPEN_MISSION_8 }}
+          projectId: open-mission-8-stdiodh
+          entryPoint: "."
+          channelId: ${{ format('pr-{0}', github.event.pull_request.number) }}
