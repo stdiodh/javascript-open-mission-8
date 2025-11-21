@@ -23,7 +23,7 @@ jobs:
       - name: Install dependencies and Build for PR Preview
         run: |
           npm ci
-          npm run build:pr
+          npm run build
 
       - name: Debug - Check Build Output
         run: |

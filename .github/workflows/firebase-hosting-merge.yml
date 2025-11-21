@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies and Build for Main
         run: |
           npm ci
-          npm run build:main
+          npm run build
 
       - name: Deploy to Firebase Hosting (Live)
         uses: FirebaseExtended/action-hosting-deploy@v0
