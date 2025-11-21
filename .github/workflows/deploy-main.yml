@@ -19,6 +19,8 @@ jobs:
         run: |
           npm ci
           npm run build
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
 
       - name: Force Include Build Folder
         run: rm .gitignore
