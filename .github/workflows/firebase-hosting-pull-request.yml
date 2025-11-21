@@ -15,30 +15,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies and Build
+      - name: Install dependencies and Build for PR Preview
         run: |
           npm ci
-          npm run build
+          npm run build:pr
 
-      - name: Debug - Check Root and firebase.json
-        run: |
-          echo "=== Current directory ==="
-          pwd
-          echo "=== List files in root ==="
-          ls -la
-          if [ -f firebase.json ]; then
-            echo "firebase.json found!"
-          else
-            echo "firebase.json NOT FOUND!"
-          fi
-
-      - name: Debug - Check build folder
+      - name: Debug - Check Build Output
         run: |
           echo "=== build directory contents ==="
           ls -R build
