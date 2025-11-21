@@ -2,27 +2,33 @@ name: Deploy to Firebase Hosting on PR
 on:
   pull_request:
   workflow_dispatch:
+
 permissions:
   checks: write
   contents: read
   pull-requests: write
+
 jobs:
   build_and_preview:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
       - run: npm ci && npm run build
-      - name: Debug - Check Config and Build
+
+      - name: Debug - Check Build Output
         run: |
-          echo "=== 1. Check firebase.json content ==="
-          cat firebase.json
-          
-          echo "=== 2. Check build directory ==="
+          echo "=== Check build directory ==="
           ls -la build/
-          
-          echo "=== 3. Check index.html content ==="
-          cat build/index.html
+          echo "=== Check index.html ==="
+          head -n 5 build/index.html
+
+      # 4. Firebase 호스팅 배포
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
