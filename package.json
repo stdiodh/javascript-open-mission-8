@@ -2,7 +2,7 @@
   "name": "javascript-open-mission-8",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "/",
   "dependencies": {
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^5.17.0",
