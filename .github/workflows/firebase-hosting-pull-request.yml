@@ -32,6 +32,9 @@ jobs:
           echo "=== index.html preview ==="
           head -n 10 build/index.html
 
+      - name: Force Include Build Folder (Delete .gitignore)
+        run: rm .gitignore
+
       - name: Deploy to Firebase Hosting (Preview)
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
