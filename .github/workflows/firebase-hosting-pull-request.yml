@@ -16,16 +16,20 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
-      - name: Debug - Cat index.html
+      - name: Debug - Check Build Output
         run: |
-          echo "=========================================="
-          echo "         CONTENT OF build/index.html      "
-          echo "=========================================="
-          cat build/index.html
-          echo "=========================================="
+          echo "=== Current Working Directory ==="
+          pwd
+          echo "=== Root File List ==="
+          ls -la
+          echo "=== Build Directory List ==="
+          ls -la build/ || echo "Build directory not found!"
+          echo "=== Content of build/index.html ==="
+          cat build/index.html || echo "index.html not found!"
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STDIODH_OPEN_MISSION_8 }}
           projectId: stdiodh-open-mission-8
+          entryPoint: "."
