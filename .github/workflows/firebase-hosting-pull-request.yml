@@ -14,6 +14,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
+      - name: Debug - Check Directory Structure
+        run: |
+          echo "=== Current Directory Path ==="
+          pwd
+          echo "=== File List in Root ==="
+          ls -la
+          echo "=== File List in Build Directory ==="
+          ls -la build/
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
