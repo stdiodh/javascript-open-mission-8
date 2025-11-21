@@ -2,15 +2,13 @@
 # https://github.com/firebase/firebase-tools
 
 name: Deploy to Firebase Hosting on PR
-on: 
+on:
   pull_request:
   workflow_dispatch:
-
 permissions:
   checks: write
   contents: read
   pull-requests: write
-
 jobs:
   build_and_preview:
     if: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
@@ -18,22 +16,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm ci && npm run build
-      - name: Debug - Check Directory Structure
-        run: |
-          echo "=== Current Directory Path ==="
-          pwd
-          echo "=== File List in Root ==="
-          ls -la
-          echo "=== File List in Build Directory ==="
-          ls -la build/
-
       - name: Debug - Cat index.html
-              run: |
-                echo "=========================================="
-                echo "         CONTENT OF build/index.html      "
-                echo "=========================================="
-                cat build/index.html
-                echo "=========================================="
+        run: |
+          echo "=========================================="
+          echo "         CONTENT OF build/index.html      "
+          echo "=========================================="
+          cat build/index.html
+          echo "=========================================="
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
