@@ -1,0 +1,18 @@
+# .firebaseignore
+
+# Git 관련
+.git
+.gitignore
+
+# 의존성 모듈
+node_modules
+
+# 환경변수 및 로그
+.env
+.env.*
+*.log
+firebase-debug.log
+
+# 설정 파일
+firebase.json
+.github
