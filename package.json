@@ -2,7 +2,7 @@
   "name": "javascript-open-mission-8",
   "version": "0.1.0",
   "private": true,
-  "homepage": "%REACT_APP_HOMEPAGE%",
+  "homepage": "/",
   "dependencies": {
     "@testing-library/dom": "^9.3.4",
     "@testing-library/jest-dom": "^5.17.0",
@@ -17,8 +17,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:pr": "REACT_APP_HOMEPAGE=. react-scripts build",
-    "build:main": "REACT_APP_HOMEPAGE=/ react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
