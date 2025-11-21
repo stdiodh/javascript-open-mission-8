@@ -20,7 +20,8 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - run: npm ci && npm run build
+      - name: Install dependencies and Build
+        run: npm ci && npm run build
 
       - name: Debug - Check Build Output
         run: |
@@ -29,9 +30,11 @@ jobs:
           echo "=== Check index.html ==="
           head -n 5 build/index.html
 
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Deploy to Firebase Hosting (Preview)
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_STDIODH_OPEN_MISSION_8 }}
           projectId: stdiodh-open-mission-8
-          entryPoint: "build" 
+          entryPoint: "."
+          channelId: pr-${{ github.event.pull_request.number }}
